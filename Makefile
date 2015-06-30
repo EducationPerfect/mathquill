@@ -20,7 +20,8 @@ BASE_SOURCES = \
 
 SOURCES_FULL = \
   $(BASE_SOURCES) \
-  $(SRC_DIR)/commands/*.js \
+  $(SRC_DIR)/commands/math.js \
+  $(SRC_DIR)/commands/text.js \
   $(SRC_DIR)/commands/*/*.js
 
 SOURCES_BASIC = \
@@ -95,13 +96,15 @@ clean:
 $(PJS_SRC): $(NODE_MODULES_INSTALLED)
 
 $(BUILD_JS): $(INTRO) $(SOURCES_FULL) $(OUTRO) $(BUILD_DIR_EXISTS)
-	cat $^ | ./script/escape-non-ascii > $@
+	cat $^ > $@
+#	cat $^ | ./script/escape-non-ascii > $@
 
 $(UGLY_JS): $(BUILD_JS) $(NODE_MODULES_INSTALLED)
 	$(UGLIFY) $(UGLIFY_OPTS) < $< > $@
 
 $(BASIC_JS): $(INTRO) $(SOURCES_BASIC) $(OUTRO) $(BUILD_DIR_EXISTS)
-	cat $^ | ./script/escape-non-ascii > $@
+	cat $^ > $@
+#	cat $^ | ./script/escape-non-ascii > $@
 
 $(UGLY_BASIC_JS): $(BASIC_JS) $(NODE_MODULES_INSTALLED)
 	$(UGLIFY) $(UGLIFY_OPTS) < $< > $@
