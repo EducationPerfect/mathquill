@@ -369,6 +369,19 @@ var MathBlock = P(MathElement, function(_, super_) {
       ctrlr.escapeDir(key === 'Shift-Spacebar' ? L : R, key, e);
       return;
     }
+    // EP
+    else if (key === 'Enter')
+    {
+      var atRootLevel =	ctrlr.cursor.parent.controller;
+	  var insideBrackets = ctrlr.cursor.parent.parent.sides;
+	  if (!atRootLevel && !insideBrackets)
+	  {
+		e.preventDefault();
+		ctrlr.escapeDir(R, key, e);
+		return;
+      }
+    }
+    // END: EP	
     return super_.keystroke.apply(this, arguments);
   };
 
